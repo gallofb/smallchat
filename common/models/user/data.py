@@ -1,21 +1,23 @@
 # coding: utf-8
 from sqlalchemy import BigInteger, Column, DateTime, Integer, String
 from sqlalchemy.schema import FetchedValue
-from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.ext.declarative import declarative_base
+#
+#
+# Base = declarative_base()
+# metadata = Base.metadata
+
+from application import db
 
 
-Base = declarative_base()
-metadata = Base.metadata
-
-
-class TesUsr(Base):
+class TesUsr(db.Model):
     __tablename__ = 'tes_usr'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(30), nullable=False)
 
 
-class User(Base):
+class User(db.Model):
     __tablename__ = 'user'
 
     uid = Column(BigInteger, primary_key=True)

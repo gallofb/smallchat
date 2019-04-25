@@ -4,17 +4,16 @@ from application import db
 # from common.libs.helpler import ops_render
 # from common.libs.UrlManager import UrlManager
 # from common.models.user import User
-from common.models.user.User import TesUsr,User
+from common.models.user.data import TesUsr,User
 # from common.libs.user.UserService import UserService
 # from application import app
 # from wtforms.validators import Emailid
+route_user = Blueprint('user_page',__name__ )
 
-route_user = Blueprint( 'user_page',__name__ )
 
-@route_user.route( "/" ,methods=['GET','POST'])
+@route_user.route("/user", methods=['GET','POST'])
 def login():
-
-    user =User.query.all()
+    user = User.query.all()
     print(user)
     # user =User.query.all()
     # print(user.uid)
