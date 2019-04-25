@@ -7,17 +7,18 @@ from sqlalchemy.schema import FetchedValue
 # Base = declarative_base()
 # metadata = Base.metadata
 
-from application import db
+from application import Base
+# from application import db
 
 
-class TesUsr(db.Model):
+class TesUsr(Base):
     __tablename__ = 'tes_usr'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(30), nullable=False)
 
 
-class User(db.Model):
+class User(Base):
     __tablename__ = 'user'
 
     uid = Column(BigInteger, primary_key=True)

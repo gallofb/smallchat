@@ -1,6 +1,6 @@
 DEBUG = True
 SQLALCHEMY_ECHO = True
-SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/datadb'
+# SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/datadb'
 SERVER_PORT = 8888
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SQLALCHEMY_ENCODING = "utf8mb4"

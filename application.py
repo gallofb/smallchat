@@ -2,16 +2,18 @@ from flask import Flask
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 import os
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import scoped_session, sessionmaker
-# from sqlalchemy.ext.declarative import declarative_base
-#
-# engine = create_engine('mysql://root:@localhost/datadb', convert_unicode=True)
-# db_session = scoped_session(sessionmaker(autocommit=False,
-#                                          autoflush=False,
-#                                          bind=engine))
-# Base = declarative_base()
-# Base.query = db_session.query_property()
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+import pymysql
+pymysql.install_as_MySQLdb()
+
+engine = create_engine('mysql://root:@localhost/datadb', convert_unicode=True)
+db_session = scoped_session(sessionmaker(autocommit=False,
+                                         autoflush=False,
+                                         bind=engine))
+Base = declarative_base()
+Base.query = db_session.query_property()
 
 
 class Application(Flask):
@@ -21,7 +23,8 @@ class Application(Flask):
         # self.config.from_pyfile('config/base_setting.py')
         # if "ops_config" in os.environ:
         self.config.from_pyfile('config/%s_setting.py' % "local")
-
+        # import common.models.user.data
+        Base.metadata.create_all(bind=engine)
         db.init_app(self)
 
 
