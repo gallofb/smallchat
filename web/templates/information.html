@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-        <p>hahah</p>
+<form action="" method="post">
+    性别:<input type="text" name="sex" value="{{ info.sex }}">
+    学校:<input type="text" name="school">
+    手机:<input type="text" name="phone">
+    邮箱:<input type="text" name="email" value="{{ info.email }}">
+    收货地址:<input type="text" name="address">
+    <input type="submit" value="保存修改">
+</form>
 </body>
 </html>

@@ -8,23 +8,89 @@ from common.models.user.User import TesUsr,User
 # from common.libs.user.UserService import UserService
 # from application import app
 # from wtforms.validators import Emailid
+route_user = Blueprint('user_page',__name__ )
 
-route_user = Blueprint( 'user_page',__name__ )
 
-@route_user.route( "/" ,methods=['GET','POST'])
+@route_user.route("/user", methods=['GET','POST'])
 def login():
+    info = User.query.filter_by(uid=1).first()
 
-    user =User.query.all()
-    print(user)
-    # user =User.query.all()
-    # print(user.uid)
-    # if user:
-    #     print("555")
-    # else:
-    #     print("888")
-    # print(type(user))
-    return "666"
+    if request.method == 'GET':
+        dicta =  {"a":1,"b":2}
+        # print(6)
+        # print(jsonify(dict))
+        # print(info.email)
+        print(type(info))
+        print("5555")
+    if request.method == 'POST':
+        # c = request.values
+        # print(c)
+        #
+        formdatas = request.form
+        print(666)
+        print(formdatas['sex'])
+        formation = User.query.filter_by(uid=1).first()
+        formation.email =formdatas['email']
+        db.session.commit()
+    return render_template('information.html',info=info)
 
-# flask-sqlacodegen 'mysql://root:491001@127.0.0.1/Courier' --outfile "common/models/tes_usr.py"  --flask
-# flask-sqlacodegen 'mysql://root:491001@127.0.0.1/Courier' --tables tes_usr --tfile "common/models/tes_usr.py"
+        # db.session.commit()
+        # print(formdatas)
+        # print(formdatas['sex'])
+        # print(formdatas['school'])
+        # print(formdatas['phone'])
+        # print(formdatas['email'])
+        # print(formdatas['address'])
+    # return render_template('information.html')
+"""
+@route_user.route("/edit", methods=["GET", "POST"])
+def edit():
+    if request.method == "GET":
+        return ops_render("user/edit.html", {"current": "edit"})
 
+    resp = {'code': 200, 'msg': "操作成功！", 'data': {}}
+
+    req = request.values
+    nickname = req['nickname'] if 'nickname' in req else ''
+    email = req['email'] if 'email' in req else ''
+
+    if nickname is None or len(nickname) < 1:
+        resp['code'] = -1
+        resp['msg'] = '请输入符合规范的姓名！'
+        return jsonify(resp)
+
+    if email is None or len(email) < 1:
+        resp['code'] = -1
+        resp['msg'] = '请输入符合规范的邮箱！'
+        return jsonify(resp)
+
+    user_info = g.current_user
+    user_info.nickname = nickname
+    user_info.email = email
+
+    db.session.add(user_info)
+    db.session.commit()
+
+    return jsonify(resp)
+
+"""
+
+# $.ajax({
+#     url: common_ops.buildUrl("/user/edit"),
+#     type: 'POST',
+#     data: data,
+#     dataType: 'json',
+#     success: function(res){
+#     btn_target.removeClass("disabled");
+# var
+# callback = null;
+# if (res.code == 200)
+# {
+#     callback = function()
+# {
+#     window.location.href = window.location.href;
+# }
+# }
+# common_ops.alert(res.msg, callback);
+# }
+# });
